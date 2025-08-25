@@ -60,7 +60,7 @@ struct ContentView: View {
                     .pickerStyle(.segmented)
                 }
                 VStack(alignment: .center, spacing: 0.0,){
-                    Text(valuePerPerson, format: .currency(code: Locale.current.currency?.identifier ?? "USD")).font(.system(size: 45.0))
+                    Text(valuePerPerson, format: .currency(code: Locale.current.currency?.identifier ?? "USD")).font(.system(size: 45.1))
                     Text("/person").foregroundColor(Color.gray)
                 }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center).padding(.vertical, 45)
             }
