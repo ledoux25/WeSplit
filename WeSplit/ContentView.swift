@@ -16,7 +16,7 @@ struct ContentView: View {
     var valuePerPerson : Double {
         
         if let checkAmount = checkAmount {
-            var totalAmount = checkAmount + checkAmount/100 * Double(tipPercentage)
+            let totalAmount = checkAmount + checkAmount/100 * Double(tipPercentage)
             print(totalAmount)
             
             return totalAmount / Double(numberOfPeople)
@@ -51,6 +51,7 @@ struct ContentView: View {
                         }
                     }.pickerStyle(.navigationLink)
                 }
+                
                 Section("How much tip do you want to leave ? "){
                     Picker("Select Tip",  selection: $tipPercentage){
                         ForEach(tipPercentages, id: \.self){
@@ -59,10 +60,26 @@ struct ContentView: View {
                     }
                     .pickerStyle(.segmented)
                 }
-                VStack(alignment: .center, spacing: 0.0,){
-                    Text(valuePerPerson, format: .currency(code: Locale.current.currency?.identifier ?? "USD")).font(.system(size: 45.1))
-                    Text("/person").foregroundColor(Color.gray)
-                }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center).padding(.vertical, 45)
+                
+                
+                
+                Section{
+                    VStack(alignment: .center, spacing: 0.0,){
+                        Text(valuePerPerson, format: .currency(code: Locale.current.currency?.identifier ?? "USD")).font(.system(size: 45.1))
+                            .foregroundStyle(tipPercentage != 0 ? Color.primary : Color.red)
+                        Text("/person")
+                            .foregroundColor(tipPercentage != 0 ? Color.gray : Color.red)
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                    .padding(.vertical, 45,)
+                    
+                }
+                .listRowInsets(EdgeInsets())
+                .border(tipPercentage == 0 ? .red : .white, width:3)
+                
+                
+                    
+
             }
             
             .toolbar{
